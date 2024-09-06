@@ -6,7 +6,7 @@ import { StyleSheet, Image, Dimensions, Platform } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 
-export type BookProps = ViewProps & {
+export type BookCardProps = ViewProps & {
   lightColor?: string;
   darkColor?: string;
   imagePath?: string;
@@ -18,14 +18,14 @@ const imageMap: { [key: string]: any } = {
   book2: require("./../assets/images/swade-fc-book-cover.jpg"),
   // Add more mappings here
 };
-export function Book({
+export function BookCard({
   style,
   lightColor,
   darkColor,
   imagePath,
   title,
   ...otherProps
-}: BookProps) {
+}: BookCardProps) {
   const backgroundColor = useThemeColor(
     { light: lightColor, dark: darkColor },
     "background"

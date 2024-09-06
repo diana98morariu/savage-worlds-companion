@@ -1,19 +1,50 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { Character } from "./../../components/Character";
-import { StyleSheet, Image, Dimensions, Platform } from "react-native";
+import { CharacterCard } from "../../components/CharacterCard";
+import {
+  StyleSheet,
+  Image,
+  Dimensions,
+  Platform,
+  Animated,
+} from "react-native";
+import ParallaxScrollView from "@/components/ParallaxScrollView";
 
 const { width, height } = Dimensions.get("window");
 
 const charactersObj = [
   {
-    imagePath: "book1",
+    imagePath: "character1",
     characterName: "Sarah",
     level: 3,
     concept: "Mage",
   },
   {
-    imagePath: "book2",
+    imagePath: "character2",
+    characterName: "Helen",
+    level: 5,
+    concept: "Fighter",
+  },
+  {
+    imagePath: "character1",
+    characterName: "Sarah",
+    level: 3,
+    concept: "Mage",
+  },
+  {
+    imagePath: "character2",
+    characterName: "Helen",
+    level: 5,
+    concept: "Fighter",
+  },
+  {
+    imagePath: "character1",
+    characterName: "Sarah",
+    level: 3,
+    concept: "Mage",
+  },
+  {
+    imagePath: "character2",
     characterName: "Helen",
     level: 5,
     concept: "Fighter",
@@ -23,17 +54,19 @@ const charactersObj = [
 export default function Characters() {
   return (
     <ThemedView style={styles.container}>
-      <ThemedView style={styles.charactersList}>
-        {charactersObj.map((character, index) => (
-          <Character
-            key={index}
-            imagePath={character.imagePath}
-            name={character.characterName}
-            level={character.level}
-            concept={character.concept}
-          />
-        ))}
-      </ThemedView>
+      <Animated.ScrollView>
+        <ThemedView style={styles.charactersList}>
+          {charactersObj.map((character, index) => (
+            <CharacterCard
+              key={index}
+              imagePath={character.imagePath}
+              name={character.characterName}
+              level={character.level}
+              concept={character.concept}
+            />
+          ))}
+        </ThemedView>
+      </Animated.ScrollView>
     </ThemedView>
   );
 }

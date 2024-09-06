@@ -6,7 +6,7 @@ import { StyleSheet, Image, Dimensions, Platform } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 
-export type CharacterProps = ViewProps & {
+export type CharacterCardProps = ViewProps & {
   lightColor?: string;
   darkColor?: string;
   imagePath: string;
@@ -17,10 +17,11 @@ export type CharacterProps = ViewProps & {
 };
 
 const imageMap: { [key: string]: any } = {
-  book1: require("./../assets/images/swade-book-cover.jpg"),
-  book2: require("./../assets/images/swade-fc-book-cover.jpg"),
+  character1: require("./../assets/images/female-mage.jpg"),
+  character2: require("./../assets/images/female-fighter.jpg"),
 };
-export function Character({
+
+export function CharacterCard({
   style,
   lightColor,
   darkColor,
@@ -29,7 +30,7 @@ export function Character({
   level,
   concept,
   ...otherProps
-}: CharacterProps) {
+}: CharacterCardProps) {
   const backgroundColor = useThemeColor(
     { light: lightColor, dark: darkColor },
     "background"

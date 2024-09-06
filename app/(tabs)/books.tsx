@@ -1,6 +1,6 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { Book } from "./../../components/Book";
+import { BookCard } from "../../components/BookCard";
 import { StyleSheet, Image, Dimensions, Platform } from "react-native";
 
 const { width, height } = Dimensions.get("window");
@@ -22,7 +22,11 @@ export default function Books() {
       {/* <ThemedText>Edit app/books.tsx to edit this screen.</ThemedText> */}
       <ThemedView style={styles.booksList}>
         {bookssObj.map((book, index) => (
-          <Book key={index} imagePath={book.imagePath} title={book.bookTitle} />
+          <BookCard
+            key={index}
+            imagePath={book.imagePath}
+            title={book.bookTitle}
+          />
         ))}
       </ThemedView>
     </ThemedView>
