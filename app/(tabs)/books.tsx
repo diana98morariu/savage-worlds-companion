@@ -5,16 +5,25 @@ import { StyleSheet, Image, Dimensions, Platform } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 
+const bookssObj = [
+  {
+    imagePath: "book1",
+    bookTitle: "Savage Worlds Adventure Edition",
+  },
+  {
+    imagePath: "book2",
+    bookTitle: "Savage Worlds Adventure Edition Fantasy Companion",
+  },
+];
+
 export default function Books() {
   return (
     <ThemedView style={styles.container}>
       {/* <ThemedText>Edit app/books.tsx to edit this screen.</ThemedText> */}
       <ThemedView style={styles.booksList}>
-        <Book imagePath="book1" title="Savage Worlds Adventure Edition" />
-        <Book
-          imagePath="book2"
-          title="Savage Worlds Adventure Edition Fantasy Companion"
-        />
+        {bookssObj.map((book, index) => (
+          <Book key={index} imagePath={book.imagePath} title={book.bookTitle} />
+        ))}
       </ThemedView>
     </ThemedView>
   );
@@ -22,8 +31,7 @@ export default function Books() {
 const styles = StyleSheet.create({
   container: {
     flex: 1, // Take up the whole screen
-    justifyContent: "flex-start", // Align items to the top
-    alignItems: "flex-start", // Align items to the left (horizontally)
+    justifyContent: "flex-start",
     paddingTop: 20,
   },
   booksList: {

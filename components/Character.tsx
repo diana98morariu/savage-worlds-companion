@@ -6,26 +6,30 @@ import { StyleSheet, Image, Dimensions, Platform } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 
-export type BookProps = ViewProps & {
+export type CharacterProps = ViewProps & {
   lightColor?: string;
   darkColor?: string;
-  imagePath?: string;
-  title?: string;
+  imagePath: string;
+  name: string;
+  level: number;
+  concept: string;
+  player?: string;
 };
 
 const imageMap: { [key: string]: any } = {
   book1: require("./../assets/images/swade-book-cover.jpg"),
   book2: require("./../assets/images/swade-fc-book-cover.jpg"),
-  // Add more mappings here
 };
-export function Book({
+export function Character({
   style,
   lightColor,
   darkColor,
   imagePath,
-  title,
+  name,
+  level,
+  concept,
   ...otherProps
-}: BookProps) {
+}: CharacterProps) {
   const backgroundColor = useThemeColor(
     { light: lightColor, dark: darkColor },
     "background"
@@ -33,41 +37,55 @@ export function Book({
   const localImageSource = imagePath ? imageMap[imagePath] : null;
 
   return (
-    <ThemedView style={styles.bookContainer}>
-      <Image source={localImageSource} style={styles.bookImage} />
-      <ThemedView style={styles.textContainer}>
+    <ThemedView style={styles.characterContainer}>
+      <Image source={localImageSource} style={styles.characterImage} />
+      <View style={styles.textContainer}>
         <ThemedText
-          type="defaultSemiBold"
+          type="subtitle"
           style={[styles.title, style]}
           {...otherProps}
         >
-          {title}
+          {name}
         </ThemedText>
-      </ThemedView>
+        <View style={styles.innerTextContainer}>
+          <ThemedText style={[styles.text, style]} {...otherProps}>
+            Level {level}
+          </ThemedText>
+          <ThemedText style={[styles.text, style]} {...otherProps}>
+            {concept}
+          </ThemedText>
+        </View>
+      </View>
     </ThemedView>
   );
 }
 const styles = StyleSheet.create({
-  bookContainer: {
-    flexDirection: "row", // Stack children vertically (default)
+  characterContainer: {
+    flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "stretch",
     width: width,
     padding: 20,
     borderBottomWidth: 2, // 1px border
-    borderBottomColor: "#242829",
+    borderBottomColor: "#242829", // Light grey color for the border
   },
   textContainer: {
-    width: 500, // Match the width of the image
-    height: 200 * (2 / 3), // Match the height of the image (same aspect ratio)
+    width: 500,
+    height: 200 * (2 / 3),
+  },
+  innerTextContainer: {
+    flexDirection: "row",
   },
   title: {
     // textAlign: "left",
   },
-  bookImage: {
+  text: {
+    marginRight: 20,
+  },
+  characterImage: {
     width: 200,
-    aspectRatio: 2 / 3, // Adjust this ratio according to your image (example: 2:3 ratio for a typical book cover)
-    resizeMode: "contain",
+    aspectRatio: 1,
+    resizeMode: "cover",
     borderBlockColor: "green",
   },
 });
